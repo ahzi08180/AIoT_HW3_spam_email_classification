@@ -36,7 +36,9 @@ def main():
     st.title("Spam Classification Demo")
     st.write("Simple demo for the hw3_spam_email Logistic Regression baseline.")
 
-    default_model_path = "models/baseline.joblib"
+    # Construct an absolute path to the model file
+    current_dir = Path(__file__).parent
+    default_model_path = current_dir / "models" / "baseline.joblib"
     st.sidebar.header("Model")
     use_default = st.sidebar.checkbox("Use default model (models/baseline.joblib)", value=True)
     uploaded_model = st.sidebar.file_uploader("Or upload joblib model bundle", type=["joblib", "pkl"])
@@ -59,7 +61,17 @@ def main():
     st.sidebar.markdown("Model bundle should include `vectorizer` and `model` keys (joblib dump).")
 
     st.header("Classify a message")
-    text = st.text_area("Enter message to classify", value="Free money waiting for you!")
+
+    if "text" not in st.session_state:
+        st.session_state.text = "Free money waiting for you!"
+
+    col1, col2 = st.columns(2)
+    if col1.button("Generate Ham Example"):
+        st.session_state.text = "Hi, I'm just following up on our meeting from yesterday."
+    if col2.button("Generate Spam Example"):
+        st.session_state.text = "Congratulations! You've won a free cruise to the Bahamas. Click here to claim your prize."
+
+    text = st.text_area("Enter message to classify", value=st.session_state.text, key="text_area")
     if st.button("Predict"):
         if model_bundle is None:
             st.error("No model loaded. Enable default model or upload one.")
