@@ -1,0 +1,12 @@
+# Data and model artifacts
+data/
+models/
+*.pkl
+*.joblib
+
+# Python env
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
