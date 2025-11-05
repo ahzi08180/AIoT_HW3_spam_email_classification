@@ -62,16 +62,16 @@ def main():
 
     st.header("Classify a message")
 
-    if "text" not in st.session_state:
-        st.session_state.text = "Free money waiting for you!"
+    if "text_input" not in st.session_state:
+        st.session_state.text_input = "Free money waiting for you!"
 
     col1, col2 = st.columns(2)
     if col1.button("Generate Ham Example"):
-        st.session_state.text = "Hi, I'm just following up on our meeting from yesterday."
+        st.session_state.text_input = "Hi, I'm just following up on our meeting from yesterday."
     if col2.button("Generate Spam Example"):
-        st.session_state.text = "Congratulations! You've won a free cruise to the Bahamas. Click here to claim your prize."
+        st.session_state.text_input = "Congratulations! You've won a free cruise to the Bahamas. Click here to claim your prize."
 
-    text = st.text_area("Enter message to classify", value=st.session_state.text, key="text_area")
+    text = st.text_area("Enter message to classify", key="text_input")
     if st.button("Predict"):
         if model_bundle is None:
             st.error("No model loaded. Enable default model or upload one.")
