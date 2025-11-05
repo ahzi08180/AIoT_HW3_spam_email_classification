@@ -1,4 +1,4 @@
-# hw3_spam_email
+# AIoT_HW3_spam_email_classification
 
 This repository contains a homework project for spam (SMS/email) classification. See `openspec/project.md` for the project context, conventions, and quickstart.
 
